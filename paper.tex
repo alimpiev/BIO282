@@ -1,0 +1,281 @@
+\documentclass[11pt, article]{memoir}  
+\usepackage[utf8]{inputenc}                
+
+\usepackage[margin=1in]{geometry} 
+\geometry{letterpaper}  
+
+\usepackage{mathtools} %trying this instead of amsmath  
+\usepackage{amsthm,amssymb}        
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{breqn}
+\usepackage{enumitem}
+\usepackage{multirow} 
+\usepackage{hyperref}
+\usepackage[tracking]{microtype}
+\usepackage{natbib}
+\usepackage{lscape}
+
+\bibliographystyle{plainnat}
+
+
+\title{Dynamics of Sexual Selection with a Genetically Transmitted \\ Mating Preference and a Cultural Trait \\ BIO 282 Final Paper}
+\author{Egor Alimpiev}
+\date{\today}                                          
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem*{remark}{Remark}
+\newtheorem{definition}{Definition}%[section]
+\newtheorem{Lemma}{Lemma}
+\newtheorem{example}{Example}
+
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\newcommand{\doubleentry}[2]{{\renewcommand{\arraystretch}{1}$\begin{array}{c}#1\\#2\end{array}$}}
+\newcommand{\expect}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\var}[1]{\Var\left[#1\right]}
+\newcommand{\mT}{\mathcal{T}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% \nonzeroparskip
+% \numberwithin{equation}{section} %trying the section numeration
+
+\begin{document}
+
+\maketitle
+
+\chapter{Introduction}
+
+In this paper we extend the work of \cite{laland1994} considering sexual selection with culturally transmitted preference. 
+
+\textcolor{red}{finish intro!!!!}
+% "inverse" case of only diploid model
+% we define the recurrences, consider several parameter values. We plot both sample trajectories and equilibrium frequencies.
+
+
+More formally, we consider diploid organisms having a culturally transmitted trait $T$, which is present in both males and femaled but is exhibited in male individuals only. We assume that $T_2$ males have decreased fitness of $1-s$ relative to $T_1$ males. 
+
+The female mating preference is assumed to be genetically transmitted and only expressed in females. $P_1P_1$ females mate indiscriminately, $P_1P_2$ females prefer to mate with $T_2$ males $h\times a$ times more frequently, and $P_2P_2$ females prefer to mate with $T_2$ males $a$ times more frequently than with $T_1$ males.
+
+We show that this system exhibits behavior that is similar to the diploid model of \cite{laland1994} in many cases. However, when biased transmission is considered, the systems behave differently
+
+\chapter{Life history}
+In total, we have six phenogenotypes, $P_1P_1T_1$, $P_1P_2T_1$, $P_2P_2T_1$, $P_1P_1T_2$, $P_1P_2T_2$, $P_2P_2T_2$, whose frequencies will be denoted by $x_1, \ldots, x_6$, respectively. 
+
+The life history is defined as follows:
+\begin{enumerate}[label=(\alph*)]
+    \item First, viability selection acts on \emph{males}. That is, the frequencies of males that participate in mating are $x_{1'} = x_1/y$, $x_{2'} = x_2/y$, $x_{3'} = x_3/y$, $x_{4'} = (1-s)x_4/y$, $x_{5'} = (1-s)x_5/y$, $x_{6'} = (1-s)x_6/y$, where, $y$ is a normalizing factor, $y = 1 - s(x_4 + x_5 + x_6)$.
+ 
+    \item Then, mating occurs. According to ther scheme outlined in the Introduction, $P_1P_1$ females mate at random, $P_1P_2$ females mate with $T_1$, $T_2$ males with frequencies $(x_{1'} + x_{2'} + x_{3'})/z$ and $(1+ ha)(x_{4'} + x_{5'} + x_{6'})/z_1$ respectively, where $z_1 = 1 + h a(x_{4'} + x_{5'} + x_{6'})$. $P_2P_2$ females mate with $T_1$, $T_2$ males with frequencies $(x_{1'} + x_{2'} + x_{3'})/z$ and $(1+ a)(x_{4'} + x_{5'} + x_{6'})/z_2$ respectively, where $z_2 = 1 + a(x_{4'} + x_{5'} + x_{6'})$. 
+    
+    \item Then, cultural transmission occurs that determines which trait the offspring gets. As usual, following \cite{feldmanBook}, we let the probabilities of a $T_1$ child resulting from $T_1\times T_1$, $T_1 \times T_2$, $T_2 \times T_1$, and $T_2 \times T_2$ matings, where the first phenotype is the mother and the second is the father, be $b_3$, $b_2$, $b_1$, and $b_0$. 
+\end{enumerate}
+The mating frequencies and frequencies of phenogenotypes in the next generation are summarized in Table~\ref{tbl:matings}.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{@{\extracolsep{4pt}}ccccccccc@{}}
+        \toprule
+        \multicolumn{2}{c}{Matings} & & \multicolumn{3}{c}{$T_1$} & \multicolumn{3}{c}{$T_2$} \\ \cline{1-2} \cline{4-6} \cline{7-9}
+        Female & Male & Freq.\ of mating & $P_1P_1$ & $P_1P_2$ &$P_2P_2$ & $P_1P_1$ & $P_1P_2$ & $P_2P_2$ \\
+        \midrule
+        \multicolumn{2}{c}{$P_1P_1T_1 \times P_1P_1T_1$} & $x_1 x_{1'}$ & $b_3$ & & & $1 - b_3$ & &  \\
+        \multicolumn{2}{c}{$P_1P_1T_1 \times P_1P_2T_1$} & $x_1 x_{2'}$ & $b_3/2$ & $b_3/2$ & & $(1-b_3)/2$ & $(1-b_3)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_1T_1 \times P_2P_2T_1$} & $x_1 x_{3'}$ & & $b_3$ & &  & $1-b_3$ &  \\ [3pt]
+
+        \multicolumn{2}{c}{$P_1P_1T_1 \times P_1P_1T_2$} & $x_1 x_{4'}$ & $b_2$ & &  & $1 - b_2$ & &  \\
+        \multicolumn{2}{c}{$P_1P_1T_1 \times P_1P_2T_2$} & $x_1 x_{5'}$ & $b_2/2$ & $b_2/2$ & & $(1-b_2)/2$ & $(1 - b_2)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_1T_1 \times P_2P_2T_2$} & $x_1 x_{6'}$ & & $b_2$ & &  & $1 - b_2$ &  \\ [5pt]
+
+        \multicolumn{2}{c}{$P_1P_2T_1 \times P_1P_1T_1$} & $x_2 x_{1'}/z_1$ & $b_3/2$ & $b_3/2$ & & $(1-b_3)/2$ & $(1-b_3)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_2T_1 \times P_1P_2T_1$} & $x_2 x_{2'}/z_1$ & $b_3/4$ & $b_3/2$ & $b_3/4$ & $(1-b_3)/4$ & $(1-b_3)/2$ & $(1-b_3)/4$ \\
+        \multicolumn{2}{c}{$P_1P_2T_1 \times P_2P_2T_1$} & $x_2 x_{3'}/z_1$ & & $b_3/2$ & $b_3/2$ & & $(1-b_3)/2$ & $(1-b_3)/2$ \\ [3pt]
+
+        \multicolumn{2}{c}{$P_1P_2T_1 \times P_1P_1T_2$} & $x_2 x_{4'}(1+ha)/z_1$ & $b_2/2$ & $b_2/2$ & & $(1-b_2)/2$ & $(1-b_2)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_2T_1 \times P_1P_2T_2$} & $x_2 x_{5'}(1+ha)/z_1$ & $b_2/4$ & $b_2/2$ & $b_2/4$ & $(1-b_2)/4$ & $(1-b_2)/2$ & $(1-b_2)/4$ \\
+        \multicolumn{2}{c}{$P_1P_2T_1 \times P_2P_2T_2$} & $x_2 x_{6'}(1+ha)/z_1$ & & $b_2/2$ & $b_2/2$ & & $(1-b_2)/2$ & $(1-b_2)/2$ \\ [5pt]
+
+        \multicolumn{2}{c}{$P_2P_2T_1 \times P_1P_1T_1$} & $x_3 x_{1'}/z_2$ & & $b_3$ & &  & $1 - b_3$ &  \\
+        \multicolumn{2}{c}{$P_2P_2T_1 \times P_1P_2T_1$} & $x_3 x_{2'}/z_2$ & & $b_3/2$ & $b_3/2$ & & $(1- b_3)/2$ & $(1-b_3)/2$ \\
+        \multicolumn{2}{c}{$P_2P_2T_1 \times P_2P_2T_1$} & $x_3 x_{3'}/z_2$ & &  & $b_3$ & &  & $1 - b_3$ \\ [3pt]
+
+        \multicolumn{2}{c}{$P_2P_2T_1 \times P_1P_1T_2$} & $x_3 x_{4'}(1+a)/z_2$ & & $b_2$ & &  & $1 - b_2$ &  \\
+        \multicolumn{2}{c}{$P_2P_2T_1 \times P_1P_2T_2$} & $x_3 x_{5'}(1+a)/z_2$ & & $b_2/2$ & $b_2/2$ & & $(1- b_2)/2$ & $(1-b_2)/2$ \\
+        \multicolumn{2}{c}{$P_2P_2T_1 \times P_2P_2T_2$} & $x_3 x_{6'}(1+a)/z_2$ & &  & $b_2$ & &  & $1 - b_2$ \\ [5pt]
+
+        \multicolumn{2}{c}{$P_1P_1T_2 \times P_1P_1T_1$} & $x_4 x_{1'}$ & $b_1$ & &  & $1 - b_1$ & &  \\
+        \multicolumn{2}{c}{$P_1P_1T_2 \times P_1P_2T_1$} & $x_4 x_{2'}$ & $b_1/2$ & $b_1/2$ & & $(1 - b_1)/2$ & $(1-b_1)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_1T_2 \times P_2P_2T_1$} & $x_4 x_{3'}$ & & $b_1$ & &  & $1 - b_1$ &  \\ [3pt]
+
+        \multicolumn{2}{c}{$P_1P_1T_2 \times P_1P_1T_2$} & $x_4 x_{4'}$ & $b_0$ & &  & $1 - b_0$ & &  \\
+        \multicolumn{2}{c}{$P_1P_1T_2 \times P_1P_2T_2$} & $x_4 x_{5'}$ & $b_0/2$ & $b_0/2$ & & $(1 - b_0)/2$ & $(1-b_0)/2$ & \\
+        \multicolumn{2}{c}{$P_1P_1T_2 \times P_2P_2T_2$} & $x_4 x_{6'}$ & & $b_0$ & &  & $1 - b_0$ &  \\ [5pt]
+        
+        \multicolumn{2}{c}{$P_1P_2T_2 \times P_1P_1T_1$} & $x_5 x_{1'}/z_1$ & $b_1/2$ & $b_1/2$ & & $(1-b_1)/2$ & $(1-b_1)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_2T_2 \times P_1P_2T_1$} & $x_5 x_{2'}/z_1$ & $b_1/4$ & $b_1/2$ & $b_1/4$ & $(1-b_1)/4$ & $(1-b_1)/2$ & $(1-b_1)/4$ \\
+        \multicolumn{2}{c}{$P_1P_2T_2 \times P_2P_2T_1$} & $x_5 x_{3'}/z_1$ & & $b_1/2$ & $b_1/2$ & & $(1-b_1)/2$ & $(1-b_1)/2$ \\ [3pt]
+
+        \multicolumn{2}{c}{$P_1P_2T_2 \times P_1P_1T_2$} & $x_5 x_{4'}(1+ha)/z_1$ & $b_0/2$ & $b_0/2$ & & $(1-b_0)/2$ & $(1-b_0)/2$ &  \\
+        \multicolumn{2}{c}{$P_1P_2T_2 \times P_1P_2T_2$} & $x_5 x_{5'}(1+ha)/z_1$ & $b_0/4$ & $b_0/2$ & $b_0/4$ & $(1-b_0)/4$ & $(1-b_0)/2$ & $(1-b_0)/4$ \\
+        \multicolumn{2}{c}{$P_1P_2T_2 \times P_2P_2T_2$} & $x_5 x_{6'}(1+ha)/z_1$ & & $b_0/2$ & $b_0/2$ & & $(1-b_0)/2$ & $(1-b_0)/2$ \\ [5pt]
+
+        \multicolumn{2}{c}{$P_2P_2T_2 \times P_1P_1T_1$} & $x_6 x_{1'}/z_2$ & & $b_1$ & &  & $1 - b_1$ &  \\
+        \multicolumn{2}{c}{$P_2P_2T_2 \times P_1P_2T_1$} & $x_6 x_{2'}/z_2$ & & $b_1/2$ & $b_1/2$ & & $(1 - b_1)/2$ & $(1 - b_1)/2$ \\
+        \multicolumn{2}{c}{$P_2P_2T_2 \times P_2P_2T_1$} & $x_6 x_{3'}/z_2$ & &  & $b_1$ & &  & $1 - b_1$ \\ [3pt]
+
+        \multicolumn{2}{c}{$P_2P_2T_2 \times P_1P_1T_2$} & $x_6 x_{4'}(1+a)/z_2$ & & $b_0$ & &  & $1 - b_0$ &  \\
+        \multicolumn{2}{c}{$P_2P_2T_2 \times P_1P_2T_2$} & $x_6 x_{5'}(1+a)/z_2$ & & $b_0/2$ & $b_0/2$ & & $(1 - b_0)/2$ & $(1 - b_0)/2$ \\
+        \multicolumn{2}{c}{$P_2P_2T_2 \times P_2P_2T_2$} & $x_6 x_{6'}(1+a)/z_2$ & &  & $b_0$ & & & $1 - b_0$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Frequencies of matings and of offspring among the six phenogenotypes with vertical cultural transmission.}
+    \label{tbl:matings}
+\end{table}
+
+\clearpage 
+
+\chapter{Recurrences}
+
+The behavior of the model is described by the following recurrent equations, obtained by suming columns of Table~\ref{tbl:matings} with appropriate frequencies.
+\begin{subequations}
+\begin{align}
+    x_{1''} & = \frac{(x_1b_3 + x_4b_1)(2x_1 + x_2) + (1-s)(x_1b_2 + x_4b_0)(2x_4 +  x_5)}{2 y} \nonumber \\
+            & + \frac{(x_2b_3 + x_5b_1)(2x_1 + x_2)+ (1-s)(1 + ha)(2x_4 + x_5)(x_2b_2 + x_5b_0)}{4yz_1} \label{eq:x1_rec} \\
+    x_{2''} & = \frac{(x_1b_3 + x_4b_1)(x_2 + 2 x_3) + (1-s)(x_1b_2 + x_4b_0)(x_5 + 2 x_6)}{2 y}  \nonumber\\
+            & + \frac{(x_2b_3 + x_5b_1)(x_1 + x_2 + x_3) + (1-s)(1+ha)(x_2b_2 + x_5b_0)(x_4+x_5+x_6)}{2 y z_1}  \nonumber\\ 
+            & + \frac{(x_3b_3 + x_6b_1)(2x_1 + x_2) + (1-s)(1+a)(x_3b_2 + x_6b_0)(2x_4+x_5)}{2yz_2} \label{eq:x2_rec} \\
+    x_{3''} & =  \frac{(x_2 b_3 + x_5 b_1)(x_2 + 2 x_3) + (1-s)(1+h a) (x_2 b_2 + x_5 b_0)(x_5 + 2 x_6)}{4 y z_1} \nonumber \\
+            & + \frac{(x_3 b_3 + x_6 b_1)(x_2 + 2 x_3) + (1-s)(1+a)(x_3 b_2+x_6b_0)(x_5 + 2 x_6)}{2 y z_2} \label{eq:x3_rec} \\
+    x_{4''} & = \frac{\left[x_1(1- b_3) + x_4(1-b_1)\right] (2x_1 + x_2)+ (1-s)\left[x_1(1- b_2) + x_4(1-b_0)\right] (2x_4 + x_5)}{2 y}\nonumber \\
+            & + \frac{\left[x_2(1-b_3) + x_5(1-b_1)\right](2x_1 + x_2) + (1-s)(1+h a) \left[x_2(1-b_2)+ x_5(1-b_0)\right](2x_4 + x_5)}{4 y z_1} \label{eq:x4_rec} \\
+    x_{5''} & =\frac{(x_1(1-b_3) + x_4(1-b_1))(x_2 + 2 x_3) + (1-s)(x_1(1-b_2) + x_4(1-b_0))(x_5 + 2 x_6)}{2 y}  \nonumber\\
+    & + \frac{(x_2(1-b_3) + x_5(1-b_1))(x_1 + x_2 + x_3) + (1-s)(1+ha)(x_2(1-b_2) + x_5(1-b_0))(x_4+x_5+x_6)}{2 y z_1}  \nonumber\\ 
+    & + \frac{(x_3(1-b_3) + x_6(1-b_1))(2x_1 + x_2) + (1-s)(1+a)(x_3(1-b_2) + x_6(1-b_0))(2x_4+x_5)}{2yz_2} \label{eq:x5_rec} \\
+    x_{6''} & = \frac{\left[x_2(1 - b_3) + x_5(1-b_1)\right](x_2 + 2 x_3) + (1-s)(1+ h a)\left[x_2(1-b_2)+x_5(1-b_0)\right](x_5 + 2 x_6)}{4 y z_1} \nonumber \\
+            & + \frac{\left[x_3(1-b_3) + x_6(1- b_1)\right](x_2 + 2 x_3) + (1-s)(1+a) \left[x_3(1-b_2) + x_6(1- b_0)\right](x_5 + 2 x_6)}{2 y z_2} \label{eq:x6_rec}
+\end{align}
+\end{subequations}
+
+Of course, the condition $x_1 + x_2 + x_3 + x_4 + x_5 + x_6 = 1$ allows us to eliminate eq.~\eqref{eq:x6_rec}, leaving us with a system of five recurrence equations.
+
+\chapter{Analysis}
+
+To analyze the behavior of the dynamical system defined by equations \ref{eq:x1_rec} -- \ref{eq:x6_rec}, we plot the trajectories of populations for several biologically relevant parameter values. 
+
+\section{Unbiased Transmission}
+
+\begin{landscape}
+        \begin{figure}[htb]
+                \centering
+                \begin{minipage}[b]{0.33\linewidth}
+                        \includegraphics[width = \textwidth]{plot1.pdf}
+                \end{minipage}
+                \begin{minipage}[b]{0.33\linewidth}
+                        \includegraphics[width = \textwidth]{plot2.pdf}
+                \end{minipage}
+                \begin{minipage}[b]{0.33\linewidth}
+                        \includegraphics[width = \textwidth]{plot3.pdf}
+                \end{minipage}
+                \caption{Unbiased transmission.}
+                \label{fig:plot_traj_unb}
+        \end{figure}
+\end{landscape}
+
+
+
+
+\section{Biased Transmission}
+
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width = 0.7\textwidth]{plot6.pdf}
+        \caption{Biased transmission.}
+        \label{fig:plot_traj_bias}
+\end{figure}
+
+
+\begin{table}[ht]
+        \centering
+        \scriptsize
+        \begin{tabular}{@{\extracolsep{4pt}}ccccccc@{}}
+                \toprule
+                & \multicolumn{6}{c}{$b_1 = b_2 =$} \\ \cline{2-7}
+                & $0.5$ & $0.495$ & $0.475$ & $0.45$ & $0.4$ & $0.25$ \\
+                \midrule
+                $s = 0.4$ & lost & lost & lost & lost & lost & 31\\
+                $a = 1.5$ &   &   &   &   &   & 36\\
+                &   &   &   &   &   & 41\\ [5pt]
+                $s = 0.4$ & lost & lost & lost & lost & lost & 30\\
+                $a = 2$ &   &   &   &   &   & 35\\
+                &   &   &   &   &   & 40\\ [5pt]
+                $s = 0.4$ & lost & lost & lost & lost & lost & 28\\
+                $a = 3$ &   &   &   &   &   & 33\\
+                &   &   &   &   &   & 37\\ [5pt]
+                $s = 0.2$ & lost & lost & lost & 322 & 65 & 21\\
+                $a = 1.5$ &   &   &   & 471 & 81 & 25\\
+                &   &   &   & 621 & 96 & 28\\ [5pt]
+                $s = 0.2$ & lost & lost & lost & 212 & 59 & 20\\
+                $a = 2$ &   &   &   & 298 & 74 & 24\\
+                &   &   &   & 385 & 89 & 28\\ [5pt]
+                $s = 0.2$ & $>1000$ & lost & lost & 135 & 52 & 19\\
+                $a = 3$ &   &   &   & 187 & 66 & 23\\
+                &   &   &   & 238 & 79 & 26\\ [5pt]
+                $s = 0.1$ & $>1000$ & $>1000$ & 177 & 90 & 46 & 19\\
+                $a = 1.5$ &   &   & 231 & 114 & 56 & 22\\
+                &   &   & 286 & 138 & 67 & 25\\ [5pt]
+                $s = 0.1$ & 399 & 313 & 138 & 79 & 43 & 18\\
+                $a = 2$ & 548 & 431 & 181 & 101 & 53 & 21\\
+                & 698 & 549 & 224 & 123 & 63 & 25\\ [5pt]
+                $s = 0.1$ & 180 & 159 & 100 & 65 & 38 & 17\\
+                $a = 3$ & 243 & 214 & 131 & 84 & 48 & 20\\
+                & 306 & 270 & 163 & 103 & 58 & 24\\ [5pt]
+                $s = 0$ & 151 & 131 & 85 & 59 & 36 & 17\\
+                $a = 1.5$ & 194 & 169 & 108 & 74 & 45 & 20\\
+                & 237 & 206 & 132 & 89 & 53 & 23\\ [5pt]
+                $s = 0$ & 120 & 107 & 75 & 54 & 34 & 16\\
+                $a = 2$ & 155 & 139 & 96 & 68 & 43 & 19\\
+                & 190 & 170 & 117 & 82 & 51 & 23\\ [5pt]
+                $s = 0$ & 88 & 81 & 62 & 47 & 31 & 16\\
+                $a = 3$ & 115 & 106 & 80 & 60 & 39 & 19\\
+                & 142 & 131 & 98 & 73 & 47 & 22\\ [5pt]
+                $s = -0.1$ & 85 & 78 & 59 & 45 & 30 & 15\\
+                $a = 1.5$ & 109 & 100 & 75 & 57 & 38 & 18\\
+                & 132 & 122 & 91 & 68 & 45 & 21\\ [5pt]
+                $s = -0.1$ & 74 & 69 & 54 & 42 & 29 & 15 \\
+                $a = 2$ & 95 & 89 & 69 & 53 & 36 & 18 \\
+                & 117 & 108 & 84 & 64 & 43 & 21 \\ [5pt]
+                $s = -0.1$ & 61 & 57 & 47 & 38 & 27 & 14\\
+                $a = 3$ & 79 & 74 & 60 & 48 & 34 & 17\\
+                & 97 & 91 & 73 & 58 & 41 & 20\\
+                \bottomrule
+        \end{tabular}
+        \caption{Number of generations to fixation.}
+        \label{tbl:ngenfix}
+\end{table}
+
+
+
+\section{Maternal Transmission}
+
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width = 0.7\textwidth]{plot10.pdf}
+        \caption{Maternal transmission.}
+        \label{fig:plot_traj_mat}
+\end{figure}
+
+\chapter{Discussion}
+
+
+
+\bibliography{282}
+
+\end{document}
+
