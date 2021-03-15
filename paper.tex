@@ -13,7 +13,7 @@
 \usepackage{breqn}
 \usepackage{enumitem}
 \usepackage{multirow} 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage[tracking]{microtype}
 \usepackage{natbib}
 \usepackage{lscape}
@@ -53,18 +53,10 @@
 
 \chapter{Introduction}
 
-In this paper we extend the work of \cite{laland1994} considering sexual selection with culturally transmitted preference. 
-
-\textcolor{red}{finish intro!!!!}
-% "inverse" case of only diploid model
-% we define the recurrences, consider several parameter values. We plot both sample trajectories and equilibrium frequencies.
-
+In this paper we extend the work of \cite{laland1994} considering sexual selection with culturally transmitted preference. Our model reverses the basis of inheritance of a trait and a female preference. 
 
 More formally, we consider diploid organisms having a culturally transmitted trait $T$, which is present in both males and femaled but is exhibited in male individuals only. We assume that $T_2$ males have decreased fitness of $1-s$ relative to $T_1$ males. 
-
 The female mating preference is assumed to be genetically transmitted and only expressed in females. $P_1P_1$ females mate indiscriminately, $P_1P_2$ females prefer to mate with $T_2$ males $h\times a$ times more frequently, and $P_2P_2$ females prefer to mate with $T_2$ males $a$ times more frequently than with $T_1$ males.
-
-We show that this system exhibits behavior that is similar to the diploid model of \cite{laland1994} in many cases. However, when biased transmission is considered, the systems behave differently
 
 \chapter{Life history}
 In total, we have six phenogenotypes, $P_1P_1T_1$, $P_1P_2T_1$, $P_2P_2T_1$, $P_1P_1T_2$, $P_1P_2T_2$, $P_2P_2T_2$, whose frequencies will be denoted by $x_1, \ldots, x_6$, respectively. 
@@ -75,7 +67,10 @@ The life history is defined as follows:
  
     \item Then, mating occurs. According to ther scheme outlined in the Introduction, $P_1P_1$ females mate at random, $P_1P_2$ females mate with $T_1$, $T_2$ males with frequencies $(x_{1'} + x_{2'} + x_{3'})/z$ and $(1+ ha)(x_{4'} + x_{5'} + x_{6'})/z_1$ respectively, where $z_1 = 1 + h a(x_{4'} + x_{5'} + x_{6'})$. $P_2P_2$ females mate with $T_1$, $T_2$ males with frequencies $(x_{1'} + x_{2'} + x_{3'})/z$ and $(1+ a)(x_{4'} + x_{5'} + x_{6'})/z_2$ respectively, where $z_2 = 1 + a(x_{4'} + x_{5'} + x_{6'})$. 
     
-    \item Then, cultural transmission occurs that determines which trait the offspring gets. As usual, following \cite{feldmanBook}, we let the probabilities of a $T_1$ child resulting from $T_1\times T_1$, $T_1 \times T_2$, $T_2 \times T_1$, and $T_2 \times T_2$ matings, where the first phenotype is the mother and the second is the father, be $b_3$, $b_2$, $b_1$, and $b_0$. 
+    \item Then, cultural transmission occurs that determines which trait the offspring gets. Following \cite{feldmanBook}, we let the probabilities of a $T_1$ child resulting from $T_1\times T_1$, $T_1 \times T_2$, $T_2 \times T_1$, and $T_2 \times T_2$ matings, where the first phenotype is the mother and the second is the father, be $b_3$, $b_2$, $b_1$, and $b_0$. 
+    
+    \begin{remark} Note that, as females are responsible for most of the complexity of the model, in this paper we formally interchange the meaning of labels $b_2$ and $b_1$ as compared to Table~2.3.1 in \cite{feldmanBook}. 
+    \end{remark}
 \end{enumerate}
 The mating frequencies and frequencies of phenogenotypes in the next generation are summarized in Table~\ref{tbl:matings}.
 
@@ -139,11 +134,13 @@ The mating frequencies and frequencies of phenogenotypes in the next generation 
     \label{tbl:matings}
 \end{table}
 
-\clearpage 
 
 \chapter{Recurrences}
 
-The behavior of the model is described by the following recurrent equations, obtained by suming columns of Table~\ref{tbl:matings} with appropriate frequencies.
+The behavior of the model is described by the following recurrent equations, obtained by suming columns of Table~\ref{tbl:matings} with appropriate frequencies. Note that our definitions for coefficients $b_i$ allow us to write these equations in a form having many of the same factors as equations on page 8 of \cite{laland1994}.
+
+\clearpage
+
 \begin{subequations}
 \begin{align}
     x_{1''} & = \frac{(x_1b_3 + x_4b_1)(2x_1 + x_2) + (1-s)(x_1b_2 + x_4b_0)(2x_4 +  x_5)}{2 y} \nonumber \\
@@ -167,37 +164,83 @@ Of course, the condition $x_1 + x_2 + x_3 + x_4 + x_5 + x_6 = 1$ allows us to el
 
 \chapter{Analysis}
 
-To analyze the behavior of the dynamical system defined by equations \ref{eq:x1_rec} -- \ref{eq:x6_rec}, we plot the trajectories of populations for several biologically relevant parameter values. 
+To analyze the behavior of the dynamical system defined by equations \ref{eq:x1_rec} -- \ref{eq:x6_rec}, we plot the trajectories of phenogenotype frequencies in evolving populations for several biologically relevant parameter values. 
+
+In addition, we attempt to describe the set of equilibrim points of the recurrence. We do this by creating \emph{``equilibrium plots''}. Here we outline the method of creating these plots.
+
+\begin{enumerate}[label=(\roman*)]
+        \item We let $\mathcal S \cong [0,1] \times [0,1]$ be the state space of the system, each point $(t_2, p_2)$ of which corresponds to a particular value of frequency of $T_2$ and $P_2$ in a population. For simplicity, we discretize $\mathcal S$ using a grid with resolution $\delta t_2 = \delta p_2 = 0.01$. 
+
+        \item For each point $(t_2, p_2) \in \mathcal S$, we then get a population with initial phenogenotype frequencies defined by usual Hardy-Weinberg rules. We let each population evolve for $\tau_\max = 200$ generations, keeping track of $t_2$ and $p_2$ at each timestep.
+        
+        \item Then, we plot all $10,000$ populations at a given generation $\tau$ as points. For example, at $\tau = 0$, the points all lie on a regular grid, and as $\tau \to \infty$ all points will lie near their equilibrium values.
+        
+        \item In fact, we chose to reflect the dynamical nature of the plot by displaying populations at several timepoints, usually at $\tau = 25, 50, 200$ or $\tau = 2, 5, 20$.
+\end{enumerate}
+
+The algorithm in detail in presented at \url{https://github.com/alimpiev/BIO282/blob/main/plots.ipynb}. Below, equilibrium plots allow us to show that qualitatively the set of equilibrium values for our model looks similar to that of \cite{laland1994}.
+
+
 
 \section{Unbiased Transmission}
+
+First, we examine unbiased cultiral transmission, $b_3 = 1$, $b_2 = b_1 = 0.5$, $b_0 = 0$, also called ``genetic transmission'' in \cite{feldmanBook}. Setting generic values of fitness and preference ($s = 0.4$, $a = 3$), we examine the behavior of populations starting at $t_2 = p_2 = 0.2$, $0.5$, and $0.8$. Repeating this for three dominance patterns ($h = 0, 0.5, 1$), we show the results in Figure~\ref{fig:plot_traj_unb}.
+
+We observe that in almost every case considered, either $T_1$ or $T_2$ is eventually fixed. We note that, except when $T_2$ is fully recessive, we observe fixation of $T_2$ -- a selectively disanvantageous trait -- even when initial frequencies of $T_1$ and $T_2$ are equal.
+
+The population in the top left corner of the figure, with initial frequencies of $T_2$ and $P_2$ equal to $0.2$, and $P_2$ dominant is a clear outlier. Here we observe $T_2$ and $P_2$ eventually approaching frequencies of approximately $0.62$ and $0.237$, respectively. This suggests to us that fixation of one or the other cultural trait is not necessary in the model. We explore this further by using an equilibrium plot, defined at the beginning of Section~4.
+
+Figure~\ref{fig:plot_eq_unb} presents such a plot. On it, we can see that as a population evolves, the frequencies of $T_2$ and $P_2$ move vertically (at varying speed depending on $T_2$) towards either the edges of a square or towards a curve in the middle, shown in orange. The value of $h$ determines the position of the equilibrium curve. The plots in Figure~\ref{fig:plot_eq_unb} look exceptionally similar to Figure~2 of \cite{laland1994}, where the equilibrium curve is reflected with respect to the line $x = y$. This reflection, intuitively, corresponds to us switching the basis of inheritance of the traits.
+
+Altogether, this allows us to conclude that for each intermediate value of $t_2$ (i.\ e.\ $t_2 \neq 0$ and $t_2 \neq 1$) we can find an equilibrium set of phenogenotype frequencies such that the polymorphism in $T$ is preserved. Following the original paper, we can also conclude that once the population is on the stable equilibrium curve, random genetic and cultural drift events will determine further position of the population. 
 
 \begin{landscape}
         \begin{figure}[htb]
                 \centering
                 \begin{minipage}[b]{0.33\linewidth}
-                        \includegraphics[width = \textwidth]{plot1.pdf}
+                        \includegraphics[width = \textwidth]{plots/plot1.pdf}
                 \end{minipage}
                 \begin{minipage}[b]{0.33\linewidth}
-                        \includegraphics[width = \textwidth]{plot2.pdf}
+                        \includegraphics[width = \textwidth]{plots/plot2.pdf}
                 \end{minipage}
                 \begin{minipage}[b]{0.33\linewidth}
-                        \includegraphics[width = \textwidth]{plot3.pdf}
+                        \includegraphics[width = \textwidth]{plots/plot3.pdf}
                 \end{minipage}
-                \caption{Unbiased transmission.}
+                \caption{Trajectories of frequencies in populations in the case of unbiased cultural transmission. Columns corresponds to different values of $h$, $h = 1, 0.5, 0$, and rows correspond to different initial frequencies.}
                 \label{fig:plot_traj_unb}
         \end{figure}
 \end{landscape}
 
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width = 0.54\textwidth]{plots/plot4_multiple.png}
+        \caption{Equilibrium plot for the case of unbiased transmission.}
+        \label{fig:plot_eq_unb}
+\end{figure}
 
 
+\section{Biased and Infectious Transmission}
 
-\section{Biased Transmission}
+Changing the values of $b_i$'s, we consider the case of \emph{biased transmission}. Sample trajectories of frequencies in populations with $b_3 = 1$, $b_2 = b_1 = 0.3$, $b_0 = 0$ are presented in Figure~\ref{fig:plot_traj_bias}. As the values of $h$ do not significantly affect the behavior, only the plots for $h = 0.5$ are shown. We see that $T_2$ fixes in each of the three cases.
+
+More generally, one can see that $T_2$ fixes, unless $t_2 = 0$ to begin with, by examining the equilibrium plot for these parameter values (Figure~\ref{fig:plot_eq_bias}). The situation is very similar to that in Figure~3 in \cite{laland1994}, where the frequency of $P_2$ decreases as $T_2$ moves to fixation.
+
+We quantify the fixation of $T_2$ by replicating Table~III of \cite{laland1994} for our model (Table~\ref{tbl:ngenfix}). We see that the times it takes to fix $T_2$ in out model with a cultural trait is approximately the same as for a genetic trait.
+
+Finally, we note that the \emph{infectious} type of cultural transmission is a special case, as far as qualitative behavior is considered. The behavior of these systems is as expected: when $b_3 = b_2 = b_1 = 1$, $b_0 = 0$, $T_1$ is fixed within the timespan of four generation; when $b_3 = 1$, $b_2 = b_1 = b_0 = 0$, $T_2$ fixes equally rapidly.
 
 \begin{figure}[htb]
         \centering
-        \includegraphics[width = 0.7\textwidth]{plot6.pdf}
-        \caption{Biased transmission.}
+        \includegraphics[width = 0.7\textwidth]{plots/plot6.pdf}
+        \caption{Trajectories of frequencies in populations in the case of biased cultural transmission.}
         \label{fig:plot_traj_bias}
+\end{figure}
+
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width = 0.54\textwidth]{plots/plot8_multiple.png}
+        \caption{Equilibrium plot for the case of biased transmission.}
+        \label{fig:plot_eq_bias}
 \end{figure}
 
 
@@ -256,24 +299,61 @@ To analyze the behavior of the dynamical system defined by equations \ref{eq:x1_
                 & 97 & 91 & 73 & 58 & 41 & 20\\
                 \bottomrule
         \end{tabular}
-        \caption{Number of generations to fixation.}
+        \caption{Number of generations to fixation for different parameter values in the case of biased transmission. The three figures in each entry correspond to nubmer of generations needed to reach $t_2 > 0.99, 0.999$, and $0.9999$, respectively. If it takes more than $1000$ generations to reach $t_2 = 0.99$, we put $>1000$ into a corresponding entry.}
         \label{tbl:ngenfix}
 \end{table}
 
+\begin{figure}[htb]
+        \centering
+        \begin{minipage}[b]{0.44\linewidth}
+                \includegraphics[width = \textwidth]{plots/plot16_multiple.png}
+        \end{minipage}
+        \begin{minipage}[b]{0.44\linewidth}
+                \includegraphics[width = \textwidth]{plots/plot20_multiple.png}
+        \end{minipage}
 
+        \caption{Equilibrium plots for infectious transmission. Colums correspond to either $T_1$ or $T_2$ being ``infectious''.}
+        \label{fig:plot_traj_unb}
+\end{figure}
 
-\section{Maternal Transmission}
+\section{Paternal Transmission}
+
+Next, paternal transmission is considered, which corresponds to values $b_3 = b_1 = 0.8$, $b_2 = b_0 = 0.2$. \cite{feldmanBook} call this type Uniparental, Father-dependent. This case is relevant since we assume that the trait $T$ is manifested only in males. Figure~\ref{fig:plot_traj_pat} shows that, once again, $T_2$ reaches stable polymorphism at intermediate frequencies even from low initial numbers. Moreover, as Figure~\ref{fig:plot_eq_pat} shows, the equilibrium values of frequency of $T_2$ form a curve in the state space similar to one in Figure~\ref{fig:plot_eq_unb} but without stable equilibria at the boundary. 
 
 \begin{figure}[htb]
         \centering
-        \includegraphics[width = 0.7\textwidth]{plot10.pdf}
-        \caption{Maternal transmission.}
-        \label{fig:plot_traj_mat}
+        \includegraphics[width = 0.7\textwidth]{plots/plot22.pdf}
+        \caption{Trajectories of frequencies in populations in the case of paternal cultural transmission.}
+        \label{fig:plot_traj_pat}
+\end{figure}
+
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width = 0.54\textwidth]{plots/plot24_multiple.png}
+        \caption{Equilibrium plot for the case of paternal transmission.}
+        \label{fig:plot_eq_pat}
 \end{figure}
 
 \chapter{Discussion}
 
+We have defined a model of sexual selection in which preference for a cultural trait is transmitted genetically. After writing down the recurrences that govern the dynamics, we explored the behavior of the system by plotting phenogenotype frequencies and equilibrium values. Our analysis suggests that genetically transmitted preference can generate sexual selection, since in many cases we have observed fixation of a selectively disanvantageous trait $T_2$ from very low frequencies. This behavior is very similar to the diploid model in \cite{laland1994}, which suggests that our reversal of the basis of inheritance preserved some fundamental features of sexual selection.
 
+Even when considering a small subset of parameters, we discovered several patterns of qualitatively different behaviors. In the case of unbiased transmission, we have observed that frequencies of genetic alleles $P_1$ and $P_2$ do not change over time, and the populations reach an equilibrium value that is either fixation of one of the traits $T$, or a stable polymorphism of $T_1$ and $T_2$. 
+
+The appearance of even a weak bias in transmission, corresponding to changing parameter values to $b_2, b_1 < 0.5$, changes the picture dramatically. Apart from a degenerate case of $t_2 = 0$, there is only one stable equilibrium $t_2 = p_2 = 1$. The strength of bias and the value of $h$ primarily determine the rate of fixation of $T_2$ and $P_2$. 
+
+If the transmission of a cultural trait is paternal, we see that all equilibrium values of $P_2$ and $T_2$ frequencies are polymorphic and lie within the range $0.35 < t_2 < 0.65$.
+
+The high number of parameters means that the model can probably demonstrate almost any behavior if we do not restrict ourselves to biologically motivated parameter values. As an example, Figure~\ref{fig:plot_osc} shows that for some specific values of $b_i$'s, the phenogenotype frequencies oscillate before reaching an equilibrium. This phenomenon is easily explained: our parameters say that the majority of $T_1\times T_1$ matings give $T_2$ offspring, and the majority of $T_2 \times T_2$ matings give $T_1$ offspring, leading to rapid changes it trait frequency from generation to generation.
+
+There are many directions for further work: of course, it would be nice to have mathematical proofs of many of the results that we inferred from the plot. Moreover, the model can be extended to include mutation, nonvertical transmission, etc. It would also be interesting to think of possibilities of observing data that can be connected to this model. While working on the paper, we were imagining the following scenario: $P$ is a gene responsible for some olfactory receptor that expressed in females, and $T$ is a behavioral trait that causes males to have a smell that interacts with a receptor.
+
+\begin{figure}[htb]
+        \centering
+        \includegraphics[width = 0.54\textwidth]{plots/plot26.pdf}
+        \caption{Damped oscillations in the system for specific parameter choices}
+        \label{fig:plot_osc}
+\end{figure}
 
 \bibliography{282}
 
